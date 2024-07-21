@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const profile = () => {
+const FeedBack = () => {
   return (
     <View>
-      <Text>profile</Text>
+      <Text>FeedBack</Text>
     </View>
   );
 };
 
-export default profile;
+export default FeedBack;
+
+const styles = StyleSheet.create({});
