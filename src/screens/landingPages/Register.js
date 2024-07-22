@@ -34,7 +34,7 @@ const Register = () => {
       const data = await register(userInfo);
       console.log(data);
       Alert.alert("Success", "You have registered successfully");
-      // navigation.navigate("Login");
+      navigation.navigate("Login");
     } catch (error) {
       console.error(error);
       // Alert.alert("Error", "Failed to register. Please try again.");
