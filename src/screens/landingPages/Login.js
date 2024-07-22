@@ -6,11 +6,12 @@ import { login } from "../../apis/auth";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userInfo, setUserInfo] = useState({});
   const navigation = useNavigation();
 
   const handleLogin = async () => {
     try {
-      const data = await login({ username, password });
+      const data = await login({ userInfo });
 
       console.log(data);
       Alert.alert("Success", "You have logged in successfully");
@@ -19,6 +20,11 @@ const Login = () => {
       console.error(error);
       Alert.alert("Error", "Invalid username or password");
     }
+  };
+
+  const onChangeHandler = (e) => {
+    console.log(e);
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 
   return (
@@ -35,7 +41,7 @@ const Login = () => {
         }}
         placeholder="Username"
         value={username}
-        onChangeText={setUsername}
+        onChangeText={onChangeHandler}
       />
       <TextInput
         style={{
@@ -48,7 +54,7 @@ const Login = () => {
         }}
         placeholder="Password"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={onChangeHandler}
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
