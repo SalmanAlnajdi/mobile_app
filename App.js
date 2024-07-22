@@ -6,6 +6,7 @@ import AuthNavigation from "./src/navigation/AuthNavigation";
 
 export default function App() {
   return (
+    
     <View style={{ flex: 1 }}>
       <NavigationContainer>
         <AuthNavigation />

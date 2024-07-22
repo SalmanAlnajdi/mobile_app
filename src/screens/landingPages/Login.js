@@ -14,6 +14,7 @@ const Login = () => {
 
       console.log(data);
       Alert.alert("Success", "You have logged in successfully");
+      navigation.navigate("Main");
     } catch (error) {
       console.error(error);
       Alert.alert("Error", "Invalid username or password");
