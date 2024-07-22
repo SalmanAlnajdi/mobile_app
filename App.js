@@ -8,8 +8,8 @@ export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
-        <AuthNavigation />
-        {/* <MainNavigation /> */}
+        {/* <AuthNavigation /> */}
+        <MainNavigation />
       </NavigationContainer>
     </View>
   );
