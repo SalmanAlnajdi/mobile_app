@@ -2,7 +2,7 @@ import instance from ".";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const checkToken = () => {
-  const token = localStorage.getItem("token");
+  const token = AsyncStorage.getItem("token");
   if (token) {
     return true;
   }
@@ -41,7 +41,7 @@ const logout = async () => {
 };
 
 const myProfile = async () => {
-  const token = localStorage.getItem("token");
+  const token = AsyncStorage.getItem("token");
   const { data } = await instance.get("/user/myprofile", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const myProfile = async () => {
 };
 
 const updateProfile = async (userInfo) => {
-  const token = localStorage.getItem("token");
+  const token = AsyncStorage.getItem("token");
   const { data } = await instance.put("/user/myprofile", userInfo, {
     headers: {
       Authorization: `Bearer ${token}`,
