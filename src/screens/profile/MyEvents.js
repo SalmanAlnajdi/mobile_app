@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const ProfilePage = () => {
+const MyEvents = () => {
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
+        backgroundColor: "green",
       }}
     >
-      <Text>ProfilePage</Text>
+      <Text>MyEvents</Text>
     </View>
   );
 };
 
-export default ProfilePage;
+export default MyEvents;
