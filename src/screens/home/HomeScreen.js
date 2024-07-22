@@ -1,8 +1,15 @@
 import { ScrollView, Text, View } from "react-native";
 import React from "react";
 import EventCard from "../../components/EventCard";
+import { useQuery } from "@tanstack/react-query";
+import getAllEvents from "../../apis/events";
 
 const HomeScreen = () => {
+  const { data: Event } = useQuery({
+    queryKey: ["getAllEvents"],
+    queryFn: () => getAllEvents(),
+  });
+
   return (
     <View style={{ width: "100%", alignItems: "center" }}>
       <View
@@ -24,9 +31,9 @@ const HomeScreen = () => {
             padding: 20,
           }}
         >
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          {Event?.map((event) => (
+            <EventCard event={event} key={event._id} />
+          ))}
         </ScrollView>
       </View>
     </View>

@@ -1,9 +1,8 @@
-import React from "react";
 import instance from ".";
 
 const getAllEvents = async () => {
-  const { data } = await instance.get("/event");
-
+  const { data } = await instance.get("/event/");
+  console.log(data);
   return data;
 };
 
