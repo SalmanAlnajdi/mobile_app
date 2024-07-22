@@ -2,6 +2,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import getAllEvents from "../apis/events";
+import { useQuery } from "@tanstack/react-query";
 
 const EventCard = () => {
   const navigation = useNavigation();
