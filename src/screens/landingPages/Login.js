@@ -11,11 +11,10 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const data = await login({ username, password });
-      // Handle successful login
+
       console.log(data);
       Alert.alert("Success", "You have logged in successfully");
     } catch (error) {
-      // Handle login error
       console.error(error);
       Alert.alert("Error", "Invalid username or password");
     }

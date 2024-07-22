@@ -26,7 +26,7 @@ const register = async (userInfo) => {
   }
 
   const { data } = await instance.post("/user/signup", userInfo);
-  storeToken(data);
+  storeToken(data.token);
   return data;
 };
 

@@ -15,29 +15,29 @@ const Register = () => {
   const navigation = useNavigation();
 
   const handleRegister = async () => {
-    if (password !== confirmPassword) {
-      Alert.alert("Error", "Passwords do not match");
-      return;
-    }
-
-    const userInfo = {
-      username,
-      password,
-      firstName,
-      lastName,
-      phone,
-      gender,
-      email,
-    };
-
     try {
+      if (password !== confirmPassword) {
+        Alert.alert("Error", "Passwords do not match");
+        return;
+      }
+
+      const userInfo = {
+        username,
+        password,
+        firstName,
+        lastName,
+        phone,
+        gender,
+        email,
+      };
+
       const data = await register(userInfo);
       console.log(data);
       Alert.alert("Success", "You have registered successfully");
-      navigation.navigate("Login");
+      // navigation.navigate("Login");
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", "Failed to register. Please try again.");
+      // Alert.alert("Error", "Failed to register. Please try again.");
     }
   };
 
