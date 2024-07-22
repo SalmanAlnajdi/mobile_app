@@ -2,29 +2,36 @@ import { Button, Text, TextInput, View, Alert } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../../apis/auth";
+import { useMutation } from "@tanstack/react-query";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userInfo, setUserInfo] = useState({});
+
   const navigation = useNavigation();
 
-  const handleLogin = async () => {
-    try {
-      const data = await login({ userInfo });
-
+  const { mutate } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: () => login({ username, password }),
+    onSuccess: (data) => {
       console.log(data);
       Alert.alert("Success", "You have logged in successfully");
       navigation.navigate("Main");
-    } catch (error) {
+    },
+    onError: (error) => {
       console.error(error);
       Alert.alert("Error", "Invalid username or password");
-    }
-  };
+    },
+  });
 
-  const onChangeHandler = (e) => {
-    console.log(e);
-    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log({ username, password }); // Log the user info to debug
+    if (username && password) {
+      mutate();
+    } else {
+      Alert.alert("Error", "Please enter both username and password");
+    }
   };
 
   return (
@@ -41,7 +48,7 @@ const Login = () => {
         }}
         placeholder="Username"
         value={username}
-        onChangeText={onChangeHandler}
+        onChangeText={setUsername}
       />
       <TextInput
         style={{
@@ -54,7 +61,7 @@ const Login = () => {
         }}
         placeholder="Password"
         value={password}
-        onChangeText={onChangeHandler}
+        onChangeText={setPassword}
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
