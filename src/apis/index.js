@@ -2,13 +2,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://192.168.0.124:8000",
+  baseURL: "http://192.168.0.149:8000",
 });
 
-instance.interceptors.request.use((config) => {
-  const token = AsyncStorage.getItem("token");
+instance.interceptors.request.use(async (config) => {
+  const token = await AsyncStorage.getItem("token");
   if (token) {
-    config.headers.Authorization = `bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
