@@ -41,12 +41,8 @@ const logout = async () => {
 };
 
 const myProfile = async () => {
-  const token = AsyncStorage.getItem("token");
-  const { data } = await instance.get("/user/myprofile", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const { data } = await instance.get("/user/myprofile");
+  console.log("auth myprofile", data);
   return data;
 };
 
