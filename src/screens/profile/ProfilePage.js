@@ -1,7 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const ProfilePage = () => {
+  const { data: user } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => myProfile(),
+  });
+
   return (
     <View
       style={{
@@ -12,6 +18,7 @@ const ProfilePage = () => {
       }}
     >
       <Text>ProfilePage</Text>
+      <Text>{console.log(user?.username)}</Text>
     </View>
   );
 };

@@ -12,7 +12,6 @@ const MainNavigation = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={homeNavigation} />
-
       <Tab.Screen name="Profile" component={profileNavigation} />
       <Tab.Screen name="Donation" component={donationNavigation} />
     </Tab.Navigator>

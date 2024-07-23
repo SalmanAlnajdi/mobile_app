@@ -47,6 +47,8 @@ const myProfile = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  console.log(data);
   return data;
 };
 
