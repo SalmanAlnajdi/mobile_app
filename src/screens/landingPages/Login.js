@@ -1,19 +1,22 @@
 import { Button, Text, TextInput, View, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../../apis/auth";
 import { useMutation } from "@tanstack/react-query";
+import UserContext from "../../context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+  const [user, setUser] = useContext(UserContext);
 
   const { mutate } = useMutation({
     mutationKey: ["login"],
     mutationFn: () => login({ username, password }),
     onSuccess: (data) => {
+      setUser(true);
       console.log(data);
       Alert.alert("Success", "You have logged in successfully");
       navigation.navigate("Main");

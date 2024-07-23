@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { myProfile } from "../../apis/auth";
 
 const Tab = createMaterialTopTabNavigator();
-const profileNavigation = () => {
+const ProfileNavigation = () => {
   const [userInfo, setUserInfo] = useState({});
   const { data: user } = useQuery({
     queryKey: ["profile"],
@@ -48,13 +48,13 @@ const profileNavigation = () => {
           tabBarActiveTintColor: "black",
         }}
       >
-        <Tab.Screen name="Profile" component={ProfilePage} />
+        <Tab.Screen name="ProfilePage" component={ProfilePage} />
         <Tab.Screen name="MyEvents" component={MyEvents} />
-        <Tab.Screen name="Donations" component={Donations} />
+        <Tab.Screen name="DonationsPage" component={Donations} />
         <Tab.Screen name="Feedback" component={FeedBack} />
       </Tab.Navigator>
     </View>
   );
 };
 
-export default profileNavigation;
+export default ProfileNavigation;

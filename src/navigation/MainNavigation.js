@@ -11,10 +11,10 @@ const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={homeNavigation} />
+      <Tab.Screen name="HomeIndex" component={homeNavigation} />
 
-      <Tab.Screen name="Profile" component={profileNavigation} />
-      <Tab.Screen name="Donation" component={donationNavigation} />
+      <Tab.Screen name="ProfileIndex" component={profileNavigation} />
+      <Tab.Screen name="DonationIndex" component={donationNavigation} />
     </Tab.Navigator>
   );
 };

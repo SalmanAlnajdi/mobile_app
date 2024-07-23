@@ -1,7 +1,8 @@
 import { Button, Text, TextInput, View, Alert, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { register } from "../../apis/auth"; // Ensure this path is correct
+import UserContext from "../../context/UserContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -14,6 +15,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const navigation = useNavigation();
 
+  const [user, setUser] = useContext(UserContext);
   const handleRegister = async () => {
     try {
       if (password !== confirmPassword) {
