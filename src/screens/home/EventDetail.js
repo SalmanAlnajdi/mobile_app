@@ -13,6 +13,7 @@ const EventDetail = ({ route }) => {
       <Text>{event.description}</Text>
       <Text>{event.date}</Text>
       <Text>{event.time}</Text>
+      <Text>{event.address}</Text>
       <Text>{event.location}</Text>
       <Image
         source={{ uri: event.image }}

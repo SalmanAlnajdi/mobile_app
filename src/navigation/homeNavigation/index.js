@@ -5,7 +5,7 @@ import HomeScreen from "../../screens/home/HomeScreen";
 import EventDetail from "../../screens/home/EventDetail";
 
 const Stack = createStackNavigator();
-const homeNavigation = () => {
+const HomeNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -17,4 +17,4 @@ const homeNavigation = () => {
   );
 };
 
-export default homeNavigation;
+export default HomeNavigation;

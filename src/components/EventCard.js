@@ -11,7 +11,13 @@ const EventCard = ({ event }) => {
   //   data: user,
   //   isLoading,
   //   error,
-  // } = useQuery(["user", event.owner], () => getUserById(event.owner));
+  // } = useQuery({
+  //   queryKey: ["user", event.owner],
+  //   queryFn: () => getUserById(event.owner),
+  // });
+
+  // console.log("User Data:", user);
+  // console.log("Error:", error);
 
   // if (isLoading) {
   //   return <Text>Loading...</Text>;
@@ -37,8 +43,8 @@ const EventCard = ({ event }) => {
         margin: 10,
       }}
     >
-      <Text>Created by: {event?.owner}</Text>
-      {/* <Text>Created by2: {user.name}</Text> */}
+      <Text>Created by: {event?.owner?.username}</Text>
+      {/* <Text>Created by2: {user?.username}</Text> */}
       <Text>Event Card</Text>
       <Text>{event.name}</Text>
       <Text>{event.description}</Text>

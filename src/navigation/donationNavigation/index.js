@@ -5,7 +5,7 @@ import AddDonationList from "../../screens/donation/AddDonationList";
 import DonationDetail from "../../screens/donation/DonationDetail";
 
 const Stack = createStackNavigator();
-const donationNavigation = () => {
+const DonationNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="HomeDonatios"
@@ -18,4 +18,4 @@ const donationNavigation = () => {
   );
 };
 
-export default donationNavigation;
+export default DonationNavigation;
