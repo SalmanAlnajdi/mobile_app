@@ -5,17 +5,22 @@ import profileNavigation from "./profileNavigation";
 import homeNavigation from "./homeNavigation";
 
 import donationNavigation from "./donationNavigation";
+import { View } from "react-native";
+import NavBar from "../components/NavBar";
 
 const Tab = createBottomTabNavigator();
 
 const MainNavigation = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="HomeIndex" component={homeNavigation} />
+    <View style={{ flex: 1 }}>
+      <NavBar />
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="HomeIndex" component={homeNavigation} />
 
-      <Tab.Screen name="ProfileIndex" component={profileNavigation} />
-      <Tab.Screen name="DonationIndex" component={donationNavigation} />
-    </Tab.Navigator>
+        <Tab.Screen name="ProfileIndex" component={profileNavigation} />
+        <Tab.Screen name="DonationIndex" component={donationNavigation} />
+      </Tab.Navigator>
+    </View>
   );
 };
 
