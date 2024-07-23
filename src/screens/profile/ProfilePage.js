@@ -65,11 +65,31 @@ const ProfilePage = () => {
             onChangeText={(text) => onChangeHandler("username", text)}
             style={styles.input}
           />
-          <Text style={styles.text}>{userProfile?.email}</Text>
-          <Text style={styles.text}>{userProfile?.firstName}</Text>
-          <Text style={styles.text}>{userProfile?.lastName}</Text>
-          <Text style={styles.text}>{userProfile?.phone}</Text>
-          <Text style={styles.text}>{userProfile?.gender}</Text>
+          <TextInput
+            defaultValue={userProfile?.email}
+            onChangeText={(text) => onChangeHandler("email", text)}
+            style={styles.input}
+          />
+          <TextInput
+            defaultValue={userProfile?.firstName}
+            onChangeText={(text) => onChangeHandler("firstName", text)}
+            style={styles.input}
+          />
+          <TextInput
+            defaultValue={userProfile?.lastName}
+            onChangeText={(text) => onChangeHandler("lastName", text)}
+            style={styles.input}
+          />
+          <TextInput
+            defaultValue={userProfile?.phone}
+            onChangeText={(text) => onChangeHandler("phone", text)}
+            style={styles.input}
+          />
+          <TextInput
+            defaultValue={userProfile?.gender}
+            onChangeText={(text) => onChangeHandler("gender", text)}
+            style={styles.input}
+          />
           <Text style={styles.text}>{userProfile?.image}</Text>
         </View>
       </View>
