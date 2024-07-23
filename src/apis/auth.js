@@ -47,12 +47,7 @@ const myProfile = async () => {
 };
 
 const updateProfile = async (userInfo) => {
-  const token = AsyncStorage.getItem("token");
-  const { data } = await instance.put("/user/myprofile", userInfo, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const { data } = await instance.put("/user/myprofile", userInfo, {});
   return data;
 };
 

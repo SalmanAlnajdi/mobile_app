@@ -31,5 +31,3 @@ const EventDetail = ({ route }) => {
 };
 
 export default EventDetail;
-
-const styles = StyleSheet.create({});
