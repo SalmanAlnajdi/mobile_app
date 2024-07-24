@@ -22,6 +22,9 @@ const DonationCard = ({ donationList }) => {
       }}
     >
       <Text>Donation Card</Text>
+      <Text>
+        List name: {donationList.name ? donationList.name : "no name"}
+      </Text>
       <Text>list created by : {donationList.createBy.username}</Text>
       <Text>{donationList._id}</Text>
 

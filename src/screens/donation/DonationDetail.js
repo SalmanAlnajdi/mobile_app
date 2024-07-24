@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -9,7 +9,7 @@ const DonationDetail = ({ route }) => {
   return (
     <View>
       <Text>DonationDetail</Text>
-      <Text>List name : {donationList.createBy.username}</Text>
+      <Text>List name : {donationList.name}</Text>
       <Text>items donated </Text>
       {donationList.donationItemId.map((item, index) => (
         <View key={index}>
@@ -18,6 +18,9 @@ const DonationDetail = ({ route }) => {
           </Text>
         </View>
       ))}
+
+      <Text>SHARE LINK</Text>
+      <Text>{`localhost:3000/link/${donationList._id}`}</Text>
     </View>
   );
 };

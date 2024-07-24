@@ -5,8 +5,10 @@ import {
   TextInput,
   View,
   FlatList,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
+import Checkbox from "expo-checkbox";
 import {
   QueryClient,
   useMutation,
@@ -16,7 +18,7 @@ import { createDonation } from "../../apis/donations";
 import { useNavigation } from "@react-navigation/native";
 
 const AddDonationItems = ({ route }) => {
-  const queryClient = new useQueryClient();
+  const queryClient = useQueryClient();
   const { listId } = route.params;
 
   if (!listId) {
@@ -32,7 +34,7 @@ const AddDonationItems = ({ route }) => {
     listId: listId,
   });
   const [items, setItems] = useState([]);
-  const [isSelected, setSelection] = useState(false);
+  const [isChecked, setChecked] = useState(false);
   const navigation = useNavigation();
 
   const addItemMutation = useMutation({
@@ -56,12 +58,13 @@ const AddDonationItems = ({ route }) => {
   };
 
   const confirmHandler = () => {
-    if (isSelected) {
+    if (isChecked) {
       console.log("Invalidating queries...");
+      navigation.navigate("DonationConfirm", { listId });
       queryClient.invalidateQueries(["listsByUser"], {
         onSuccess: () => {
           console.log("Query invalidated and refetched successfully.");
-          navigation.navigate("HomeDonations");
+          navigation.navigate("DonationConfirm");
         },
         onError: (error) => {
           console.error("Error invalidating queries: ", error);
@@ -69,6 +72,7 @@ const AddDonationItems = ({ route }) => {
       });
     } else {
       console.log("Please accept the terms and conditions.");
+      Alert.alert("Error", "Please Accept Term and Condition");
     }
   };
 
@@ -127,6 +131,16 @@ const AddDonationItems = ({ route }) => {
           style={styles.input}
         />
       </View>
+      <View style={styles.container}>
+        <View style={styles.section}>
+          <Checkbox
+            style={styles.checkbox}
+            value={isChecked}
+            onValueChange={setChecked}
+          />
+          <Text style={styles.paragraph}>Accpted Term and Condition</Text>
+        </View>
+      </View>
       <Pressable onPress={addItem} style={styles.button}>
         <Text style={styles.buttonText}>Add Item</Text>
       </Pressable>
@@ -184,6 +198,16 @@ const styles = StyleSheet.create({
   text: {
     height: 40,
     paddingTop: 10,
+  },
+  section: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  paragraph: {
+    fontSize: 15,
+  },
+  checkbox: {
+    margin: 8,
   },
 });
 

@@ -10,9 +10,9 @@ const AddDonationList = ({ navigation }) => {
     mutationKey: ["addList"],
     mutationFn: (list) => createList(list),
     onSuccess: (data) => {
-      console.log(data);
+      console.log("backend data", data);
       // Ensure the data contains the list ID
-      const listId = data._id; // Use _id based on your API response structure
+      const listId = data?._id; // Use _id based on your API response structure
       if (listId) {
         // Navigate to the AddDonationItems screen with the new list ID
         navigation.navigate("AddDonationItems", { listId });
@@ -26,9 +26,9 @@ const AddDonationList = ({ navigation }) => {
   });
 
   const addList = () => {
-    if (listName.trim()) {
-      addListMutation.mutate({ listName });
-    }
+    // if (listName.trim()) {
+    addListMutation.mutate({ name: listName });
+    // }
   };
 
   return (
@@ -39,7 +39,7 @@ const AddDonationList = ({ navigation }) => {
         <TextInput
           placeholder="Enter your List Name"
           value={listName}
-          onChangeText={setListName}
+          onChangeText={(text) => setListName(text)}
           style={styles.input}
         />
       </View>

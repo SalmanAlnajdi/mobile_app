@@ -33,7 +33,7 @@ const createList = async (donationList) => {
   }
 
   try {
-    const res = await instance.post("/donation/list");
+    const res = await instance.post("/donation/list", donationList);
     return res.data;
   } catch (error) {
     console.error("Error creating list:", error);
@@ -43,6 +43,11 @@ const createList = async (donationList) => {
 
 const getAllLists = async () => {
   const { data } = await instance.get("/donation/list");
+  return data;
+};
+
+const getListById = async (listId) => {
+  const { data } = await instance.get(`/donation/list/${listId})`);
   return data;
 };
 
@@ -57,4 +62,5 @@ export {
   createList,
   getAllLists,
   getListsByUser,
+  getListById,
 };
