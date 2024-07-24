@@ -32,6 +32,7 @@ const AddDonationItems = ({ route }) => {
     listId: listId,
   });
   const [items, setItems] = useState([]);
+  const [isSelected, setSelection] = useState(false);
   const navigation = useNavigation();
 
   const addItemMutation = useMutation({
@@ -55,16 +56,20 @@ const AddDonationItems = ({ route }) => {
   };
 
   const confirmHandler = () => {
-    console.log("Invalidating queries...");
-    queryClient.invalidateQueries(["listsByUser"], {
-      onSuccess: () => {
-        console.log("Query invalidated and refetched successfully.");
-        navigation.navigate("HomeDonations");
-      },
-      onError: (error) => {
-        console.error("Error invalidating queries: ", error);
-      },
-    });
+    if (isSelected) {
+      console.log("Invalidating queries...");
+      queryClient.invalidateQueries(["listsByUser"], {
+        onSuccess: () => {
+          console.log("Query invalidated and refetched successfully.");
+          navigation.navigate("HomeDonations");
+        },
+        onError: (error) => {
+          console.error("Error invalidating queries: ", error);
+        },
+      });
+    } else {
+      console.log("Please accept the terms and conditions.");
+    }
   };
 
   return (
