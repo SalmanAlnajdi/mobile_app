@@ -1,11 +1,19 @@
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import EventCard from "../../components/EventCard";
 import { useNavigation } from "@react-navigation/native";
 import DonationCard from "../../components/DonationCard";
+import { getListsByUser } from "../../apis/donations";
+import { useQuery } from "@tanstack/react-query";
 
 const HomeDonatios = () => {
   const navigation = useNavigation();
+
+  const { data: listsByUser } = useQuery({
+    queryKey: ["listsByUser"],
+    queryFn: getListsByUser,
+  });
+
+  console.log(listsByUser);
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
       <Text style={{ fontSize: 30 }}>HomeDonatios</Text>
@@ -23,10 +31,9 @@ const HomeDonatios = () => {
         }}
       >
         <ScrollView style={{ width: "100%", height: "100%", flexWrap: "wrap" }}>
-          <DonationCard />
-          <DonationCard />
-          <DonationCard />
-          <DonationCard />
+          {listsByUser?.map((list) => (
+            <DonationCard donationList={list} key={list._id} />
+          ))}
         </ScrollView>
       </View>
     </View>

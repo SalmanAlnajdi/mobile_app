@@ -15,6 +15,7 @@ const createDonation = async (donation, image) => {
       name: donation.name,
       description: donation.description,
       condition: donation.condition,
+      listId: donation.listId,
     });
 
     console.log("Response:", res);
@@ -25,4 +26,35 @@ const createDonation = async (donation, image) => {
   }
 };
 
-export { createDonation, getAllDonation };
+const createList = async (donationList) => {
+  const formData = new FormData();
+  for (const key in donationList) {
+    formData.append(key, donationList[key]);
+  }
+
+  try {
+    const res = await instance.post("/donation/list");
+    return res.data;
+  } catch (error) {
+    console.error("Error creating list:", error);
+    throw error;
+  }
+};
+
+const getAllLists = async () => {
+  const { data } = await instance.get("/donation/list");
+  return data;
+};
+
+const getListsByUser = async () => {
+  const { data } = await instance.get("/donation/listbyuser");
+  return data;
+};
+
+export {
+  createDonation,
+  getAllDonation,
+  createList,
+  getAllLists,
+  getListsByUser,
+};
