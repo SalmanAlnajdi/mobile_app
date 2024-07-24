@@ -3,6 +3,7 @@ import React from "react";
 import HomeDonatios from "../../screens/donation/HomeDonatios";
 import AddDonationList from "../../screens/donation/AddDonationList";
 import DonationDetail from "../../screens/donation/DonationDetail";
+import AddDonationItems from "../../screens/donation/AddDonationItems";
 
 const Stack = createStackNavigator();
 const DonationNavigation = () => {
@@ -14,6 +15,7 @@ const DonationNavigation = () => {
       <Stack.Screen name="HomeDonatios" component={HomeDonatios} />
       <Stack.Screen name="AddDonationList" component={AddDonationList} />
       <Stack.Screen name="DonationDetail" component={DonationDetail} />
+      <Stack.Screen name="AddDonationItems" component={AddDonationItems} />
     </Stack.Navigator>
   );
 };

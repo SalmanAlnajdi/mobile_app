@@ -36,9 +36,6 @@ const ProfilePage = () => {
     setUserInfo({ ...userInfo, [key]: value });
   };
 
-  console.log("User Data:", userProfile);
-  console.log("User Info:", userInfo);
-
   return (
     <View
       style={{

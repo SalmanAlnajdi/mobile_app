@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const DonationDetail = () => {
+const DonationDetail = ({ list }) => {
   return (
     <View>
       <Text>DonationDetail</Text>
+
+      <Text>{list?.name}</Text>
     </View>
   );
 };
