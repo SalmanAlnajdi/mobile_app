@@ -22,13 +22,13 @@ const DonationCard = ({ donationList }) => {
       }}
     >
       <Text>Donation Card</Text>
-      <Text>{donationList.name}</Text>
+      <Text>list created by : {donationList.createBy.username}</Text>
       <Text>{donationList._id}</Text>
 
       <Button
         title="View Details"
         onPress={() => {
-          navigation.navigate("DonationDetail");
+          navigation.navigate("DonationDetail", { donationList });
         }}
       />
     </View>
