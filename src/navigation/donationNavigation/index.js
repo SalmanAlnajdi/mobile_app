@@ -4,6 +4,7 @@ import HomeDonatios from "../../screens/donation/HomeDonatios";
 import AddDonationList from "../../screens/donation/AddDonationList";
 import DonationDetail from "../../screens/donation/DonationDetail";
 import AddDonationItems from "../../screens/donation/AddDonationItems";
+import DonationConfirm from "../../screens/donation/DonationConfirm";
 
 const Stack = createStackNavigator();
 const DonationNavigation = () => {
@@ -16,6 +17,7 @@ const DonationNavigation = () => {
       <Stack.Screen name="AddDonationList" component={AddDonationList} />
       <Stack.Screen name="DonationDetail" component={DonationDetail} />
       <Stack.Screen name="AddDonationItems" component={AddDonationItems} />
+      <Stack.Screen name="DonationConfirm" component={DonationConfirm} />
     </Stack.Navigator>
   );
 };
