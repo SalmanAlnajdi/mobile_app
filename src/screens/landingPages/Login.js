@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   CheckBox,
+  Alert,
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";

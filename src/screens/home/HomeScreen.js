@@ -25,7 +25,20 @@ const HomeScreen = () => {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 30 }}>HomeScreen</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            color: "white",
+            borderColor: "red",
+            borderWidth: 1,
+            borderRadius: 10,
+            width: "90%",
+            textAlign: "center",
+            padding: 10,
+          }}
+        >
+          Search Events
+        </Text>
         <ScrollView
           style={{
             height: "100%",
