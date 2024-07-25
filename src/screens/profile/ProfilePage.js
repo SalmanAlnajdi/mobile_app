@@ -42,7 +42,7 @@ const ProfilePage = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
+        backgroundColor: "#1E1E2B",
       }}
     >
       <Text>ProfilePage</Text>

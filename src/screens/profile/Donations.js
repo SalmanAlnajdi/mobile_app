@@ -8,7 +8,7 @@ const Donations = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "blue",
+        backgroundColor: "#1E1E2B",
       }}
     >
       <Text>Donations</Text>

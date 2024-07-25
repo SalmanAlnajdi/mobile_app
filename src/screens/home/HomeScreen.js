@@ -11,7 +11,13 @@ const HomeScreen = () => {
   });
 
   return (
-    <View style={{ width: "100%", alignItems: "center" }}>
+    <View
+      style={{
+        width: "100%",
+        alignItems: "center",
+        backgroundColor: "#1E1E2B",
+      }}
+    >
       <View
         style={{
           width: "100%",
@@ -24,7 +30,7 @@ const HomeScreen = () => {
           style={{
             height: "100%",
             width: "90%",
-            backgroundColor: "red",
+
             flexWrap: "wrap",
             flexDirection: "column",
 

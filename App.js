@@ -19,7 +19,7 @@ export default function App() {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#1E1E2B" }}>
           <UserContext.Provider value={[user, setUser]}>
             <NavigationContainer>
               {user ? <MainNavigation /> : <AuthNavigation />}

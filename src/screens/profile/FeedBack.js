@@ -8,7 +8,7 @@ const FeedBack = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "yellow",
+        backgroundColor: "#1E1E2B",
       }}
     >
       <Text>FeedBack</Text>

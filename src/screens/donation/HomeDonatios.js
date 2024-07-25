@@ -15,7 +15,13 @@ const HomeDonatios = () => {
 
   console.log(listsByUser);
   return (
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#1E1E2B",
+      }}
+    >
       <Text style={{ fontSize: 30 }}>HomeDonatios</Text>
       <Button
         title=" Add Donate List + "
@@ -25,7 +31,7 @@ const HomeDonatios = () => {
       ></Button>
       <View
         style={{
-          height: "80%",
+          height: "100%",
           width: "100%",
           borderBlockColor: "red",
         }}

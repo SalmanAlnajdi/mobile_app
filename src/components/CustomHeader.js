@@ -5,7 +5,12 @@ import { View, Text, Image, StyleSheet } from "react-native";
 const CustomHeader = ({ username, profileImage }) => {
   return (
     <View
-      style={{ flexDirection: "Column", alignItems: "center", padding: 10 }}
+      style={{
+        flexDirection: "Column",
+        alignItems: "center",
+        padding: 10,
+        backgroundColor: "#1E1E2B",
+      }}
     >
       <Image
         source={{ uri: profileImage }}
