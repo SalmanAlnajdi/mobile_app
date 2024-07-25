@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { logout, myProfile, updateProfile } from "../../apis/auth";
 import {
@@ -37,63 +44,69 @@ const ProfilePage = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#1E1E2B",
-      }}
+    <ScrollView
+      scrollEventThrottle={16}
+      style={{ flex: 1, backgroundColor: "#1E1E2B" }}
     >
-      <Text>ProfilePage</Text>
-      <View style={{ flexDirection: "row", padding: 10 }}>
-        <View>
-          <Text style={styles.text}>Username : </Text>
-          <Text style={styles.text}>Email : </Text>
-          <Text style={styles.text}>FirstName : </Text>
-          <Text style={styles.text}>LastName : </Text>
-          <Text style={styles.text}>Phone : </Text>
-          <Text style={styles.text}>Gender : </Text>
-          <Text style={styles.text}>Image : </Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#1E1E2B",
+          padding: 100,
+        }}
+      >
+        <Text>ProfilePage</Text>
+        <View style={{ flexDirection: "row", padding: 10 }}>
+          <View>
+            <Text style={styles.text}>Username : </Text>
+            <Text style={styles.text}>Email : </Text>
+            <Text style={styles.text}>FirstName : </Text>
+            <Text style={styles.text}>LastName : </Text>
+            <Text style={styles.text}>Phone : </Text>
+            <Text style={styles.text}>Gender : </Text>
+            <Text style={styles.text}>Image : </Text>
+          </View>
+          <View>
+            <TextInput
+              defaultValue={userProfile?.username}
+              onChangeText={(text) => onChangeHandler("username", text)}
+              style={styles.input}
+            />
+            <TextInput
+              defaultValue={userProfile?.email}
+              onChangeText={(text) => onChangeHandler("email", text)}
+              style={styles.input}
+            />
+            <TextInput
+              defaultValue={userProfile?.firstName}
+              onChangeText={(text) => onChangeHandler("firstName", text)}
+              style={styles.input}
+            />
+            <TextInput
+              defaultValue={userProfile?.lastName}
+              onChangeText={(text) => onChangeHandler("lastName", text)}
+              style={styles.input}
+            />
+            <TextInput
+              defaultValue={userProfile?.phone}
+              onChangeText={(text) => onChangeHandler("phone", text)}
+              style={styles.input}
+            />
+            <TextInput
+              defaultValue={userProfile?.gender}
+              onChangeText={(text) => onChangeHandler("gender", text)}
+              style={styles.input}
+            />
+            <Text style={styles.text}>{userProfile?.image}</Text>
+          </View>
         </View>
-        <View>
-          <TextInput
-            defaultValue={userProfile?.username}
-            onChangeText={(text) => onChangeHandler("username", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.email}
-            onChangeText={(text) => onChangeHandler("email", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.firstName}
-            onChangeText={(text) => onChangeHandler("firstName", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.lastName}
-            onChangeText={(text) => onChangeHandler("lastName", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.phone}
-            onChangeText={(text) => onChangeHandler("phone", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.gender}
-            onChangeText={(text) => onChangeHandler("gender", text)}
-            style={styles.input}
-          />
-          <Text style={styles.text}>{userProfile?.image}</Text>
-        </View>
+        <Pressable onPress={() => mutate(userInfo)} style={styles.button}>
+          <Text style={styles.buttonText}>Update</Text>
+        </Pressable>
       </View>
-      <Pressable onPress={() => mutate(userInfo)} style={styles.button}>
-        <Text style={styles.buttonText}>Update</Text>
-      </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 
