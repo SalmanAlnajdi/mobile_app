@@ -30,7 +30,13 @@ const HomeDonatios = () => {
           borderBlockColor: "red",
         }}
       >
-        <ScrollView style={{ width: "100%", height: "100%", flexWrap: "wrap" }}>
+        <ScrollView
+          style={{
+            width: "100%",
+            height: "100%",
+            flexWrap: "wrap",
+          }}
+        >
           {listsByUser?.map((list) => (
             <DonationCard donationList={list} key={list._id} />
           ))}
