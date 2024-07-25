@@ -41,7 +41,6 @@ const AddDonationItems = ({ route }) => {
     mutationKey: ["addItem"],
     mutationFn: (newItem) => createDonation({ ...newItem, listId }),
     onSuccess: (data) => {
-      console.log(data);
       setItems([...items, newItem]);
       setNewItem({ name: "", description: "", imageUrl: "", condition: "" });
     },
