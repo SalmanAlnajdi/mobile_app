@@ -25,7 +25,7 @@ const ProfileNavigation = () => {
   console.log(profileImage);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#1E1E2B" }}>
       <CustomHeader username={username} profileImage={profileImage} />
       <Tab.Navigator
         screenOptions={{

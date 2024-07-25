@@ -8,7 +8,7 @@ const MyEvents = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "green",
+        backgroundColor: "#1E1E2B",
       }}
     >
       <Text>MyEvents</Text>
