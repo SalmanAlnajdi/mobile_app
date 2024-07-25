@@ -43,7 +43,7 @@ const MainNavigation = () => {
               let iconName;
               let backgroundColor = focused ? "#FFFFFF2B" : "#FFFFFF0B";
 
-              if (route.name === "HomeIndex") {
+              if (route.name === "Main") {
                 iconName = "home";
               } else if (route.name === "ProfileIndex") {
                 iconName = "user";
