@@ -4,8 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Image,
-  CheckBox,
+  Alert,
 } from "react-native";
 import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -132,14 +131,8 @@ const Login = () => {
       </View>
 
       <View style={styles.rememberMeContainer}>
-        {/* <CheckBox
-          value={rememberMe}
-          onValueChange={setRememberMe}
-          style={styles.checkbox}
-        /> */}
-        <Text style={styles.rememberMeText}>Remember me</Text>
         <TouchableOpacity>
-          <Text style={styles.forgotPasswordText}>Forgot Password</Text>
+          <Text style={styles.forgotPasswordText}>Forget Password?</Text>
         </TouchableOpacity>
       </View>
       <LinearGradient
@@ -148,7 +141,7 @@ const Login = () => {
         end={{ x: 1, y: 0 }}
         style={{
           padding: 15,
-          borderRadius: 8,
+          borderRadius: 10,
           marginBottom: 20,
           width: "100%",
           alignItems: "center",
@@ -164,7 +157,9 @@ const Login = () => {
           navigation.navigate("Register");
         }}
       >
-        <Text style={styles.signupText}>Don’t have an account? Signup</Text>
+        <Text style={styles.signupText}>
+          Don’t have an account? <Text style={styles.label}> Sign in</Text>
+        </Text>
       </TouchableOpacity>
     </View>
   );
