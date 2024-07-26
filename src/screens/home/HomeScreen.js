@@ -11,6 +11,8 @@ import React, { useState } from "react";
 import EventCard from "../../components/EventCard";
 import { useQuery } from "@tanstack/react-query";
 import getAllEvents from "../../apis/events";
+import { LinearGradient } from "expo-linear-gradient";
+import { FontAwesome } from "@expo/vector-icons";
 
 const HomeScreen = () => {
   const { data: events } = useQuery({
@@ -35,12 +37,24 @@ const HomeScreen = () => {
           value={searchQuery}
           onChangeText={handleSearchChange}
         />
-        <TouchableOpacity style={styles.filterButton}>
-          <Image
-            // source={require("../../assets/filter-icon.png")} // Add your filter icon image here
-            style={styles.filterIcon}
-          />
-        </TouchableOpacity>
+        <LinearGradient
+          colors={["#4D81D3", "#9765B5"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{
+            padding: 15,
+            borderRadius: 10,
+
+            width: 40,
+            height: 40,
+
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="filter" size={14} color="#FFF" />
+          </TouchableOpacity>
+        </LinearGradient>
       </View>
       <ScrollView style={styles.scrollView}>
         {events?.map((event) => (
