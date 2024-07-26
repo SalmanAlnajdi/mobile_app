@@ -10,6 +10,8 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getListById } from "../../apis/donations";
 import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 const DonationConfirm = ({ route }) => {
   const { listId } = route.params;
@@ -58,12 +60,28 @@ const DonationConfirm = ({ route }) => {
           </View>
         ))}
       </ScrollView>
-      <Pressable
+      {/* <Pressable
         onPress={() => navigation.navigate("HomeDonatios")}
         style={styles.button}
       >
         <Text style={styles.buttonText}>Confirm</Text>
-      </Pressable>
+      </Pressable> */}
+      <LinearGradient
+        colors={["#4D81D3", "#9765B5"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{
+          padding: 15,
+          borderRadius: 10,
+          marginBottom: 20,
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate("HomeDonatios")}>
+          <Text style={styles.signInButtonText}>Confirm </Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
@@ -71,13 +89,14 @@ const DonationConfirm = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingBottom: 100,
     backgroundColor: "#1E1E2B",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#fff",
   },
   name: {
     fontSize: 18,
@@ -87,20 +106,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 16,
+    color: "#fff",
   },
   item: {
     marginBottom: 16,
     padding: 16,
     backgroundColor: "#f9f9f9",
     borderRadius: 8,
+    color: "#fff",
   },
   itemName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   itemDescription: {
     fontSize: 16,
     marginBottom: 8,
+    color: "#fff",
   },
   image: {
     width: 100,
@@ -109,9 +132,11 @@ const styles = StyleSheet.create({
   },
   itemCondition: {
     fontSize: 16,
+    color: "#fff",
   },
   itemReceiver: {
     fontSize: 16,
+    color: "#fff",
   },
   button: {
     padding: 10,

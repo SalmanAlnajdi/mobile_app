@@ -9,6 +9,7 @@ import { View } from "react-native";
 import UserContext from "../../context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import { myProfile } from "../../apis/auth";
+import { BASE_URL } from "../../apis";
 
 const Tab = createMaterialTopTabNavigator();
 const ProfileNavigation = () => {
@@ -20,7 +21,7 @@ const ProfileNavigation = () => {
   });
 
   const username = userProfile?.username;
-  const profileImage = `http://192.168.0.149:8000/${userProfile?.image}`;
+  const profileImage = `${BASE_URL}/${userProfile?.image}`;
 
   console.log(profileImage);
 
