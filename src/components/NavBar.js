@@ -28,6 +28,7 @@ const NavBar = () => {
           flex: 1,
           justifyContent: "center",
           alignItems: "flex-end",
+          paddingRight: 15,
         }}
       >
         <View
