@@ -82,6 +82,7 @@ import FeedBack from "../../screens/profile/FeedBack";
 import CustomHeader from "../../components/CustomHeader";
 import { useQuery } from "@tanstack/react-query";
 import { myProfile } from "../../apis/auth";
+import { BASE_URL } from "../../apis";
 import UserContext from "../../context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -130,8 +131,10 @@ const ProfileNavigation = () => {
   });
 
   const username = userProfile?.username;
-  const profileImage =
-    "https://www.pngitem.com/pimgs/m/404-4042710_circle-profile-picture-png-transparent-png.png";
+  const profileImage = `${BASE_URL}/${userProfile?.image}`;
+
+  console.log(profileImage);
+
 
   return (
     <View style={{ flex: 1, backgroundColor: "#1E1E2B" }}>

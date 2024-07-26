@@ -2,6 +2,8 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { createList } from "../../apis/donations";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 const AddDonationList = ({ navigation }) => {
   const [listName, setListName] = useState("");
@@ -35,17 +37,33 @@ const AddDonationList = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Add Donation List</Text>
       <View style={styles.inputRow}>
-        <Text style={styles.label}>List Name:</Text>
         <TextInput
           placeholder="Enter your List Name"
+          placeholderTextColor="#aaa"
           value={listName}
           onChangeText={(text) => setListName(text)}
           style={styles.input}
         />
       </View>
-      <Pressable onPress={addList} style={styles.button}>
-        <Text style={styles.buttonText}>Add List</Text>
-      </Pressable>
+      <LinearGradient
+        colors={["#4D81D3", "#9765B5"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{
+          padding: 15,
+          borderRadius: 10,
+          marginBottom: 20,
+          width: "70%",
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity onPress={addList}>
+          <Text style={styles.signInButtonText}>Add List </Text>
+        </TouchableOpacity>
+      </LinearGradient>
+      <Text style={styles.buttonText}>
+        * Create a list for your donation so you can share it with others{" "}
+      </Text>
     </View>
   );
 };
@@ -62,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#fff",
   },
   inputRow: {
     flexDirection: "row",
@@ -73,11 +92,18 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   input: {
+    width: "80%",
     height: 40,
-    borderColor: "gray",
+    borderColor: "#4583D5",
     borderWidth: 1,
-    flex: 1,
-    padding: 5,
+    marginBottom: 12,
+    paddingLeft: 8,
+
+    placeholderTextColor: "FFFFFF",
+    backgroundColor: "#1E1E2B",
+    color: "#fff",
+    padding: 10,
+    borderRadius: 10,
   },
   button: {
     padding: 10,
