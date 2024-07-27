@@ -3,9 +3,11 @@ import React, { useContext } from "react";
 import { logout } from "../apis/auth";
 import UserContext from "../context/UserContext";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
 
-const NavBar = () => {
+const NavBar = ({ showBackArrow }) => {
   const [user, setUser] = useContext(UserContext);
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -16,7 +18,20 @@ const NavBar = () => {
         padding: 10,
       }}
     >
-      <View style={{ flex: 1 }}></View>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={{
+            marginLeft: 10,
+          }}
+        >
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </Pressable>
+      </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image
           source={require("../assets/Gadha-logo-co.png")}

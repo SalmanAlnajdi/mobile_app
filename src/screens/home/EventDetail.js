@@ -101,7 +101,7 @@ const EventDetail = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         {/* <Image source={{ uri: event.owner.avatar }} style={styles.avatar} /> */}
-        <Text style={styles.ownerName}>{event.owner.username}</Text>
+        <Text style={styles.ownerName}>{event.username}</Text>
       </View>
       <Image source={{ uri: event.image }} style={styles.eventImage} />
       <View style={styles.infoContainer}>
