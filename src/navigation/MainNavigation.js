@@ -24,6 +24,10 @@ const MainNavigation = () => {
             headerShown: false,
             tabBarShowLabel: false,
             tabBarStyle: {
+              borderTopWidth: 0,
+              flexDirection: "row",
+              paddingRight: -20,
+              paddingLeft: -20,
               backgroundColor: "#1e1e2b",
               width: "90%",
               height: 70,

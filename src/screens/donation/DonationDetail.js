@@ -26,7 +26,6 @@ const DonationDetail = ({ route }) => {
   });
 
   const deleteListHandler = () => {
-    // deleteList.mutate(donationList._id);
     deleteListMutation(donationList._id);
   };
 
