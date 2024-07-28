@@ -73,10 +73,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons"; // Make sure to install @expo/vector-icons if not already installed
+import { BASE_URL } from "../../apis";
+import { Dayjs } from "dayjs";
 
 const EventDetail = ({ route }) => {
   const { event } = route.params;
   const navigation = useNavigation();
+  const dayjs = require("dayjs");
+  dayjs().format();
 
   const handleVolunteerPress = () => {
     Alert.alert(
@@ -100,27 +104,42 @@ const EventDetail = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* <Image source={{ uri: event.owner.avatar }} style={styles.avatar} /> */}
         <Text style={styles.ownerName}>{event.username}</Text>
       </View>
-      <Image source={{ uri: event.image }} style={styles.eventImage} />
+      <View
+        style={{
+          width: "100%",
+          height: "35%",
+          borderRadius: 10,
+          overflow: "hidden",
+          marginBottom: 10,
+        }}
+      >
+        <Image
+          source={{ uri: `${BASE_URL}/${event.image}` }}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </View>
+      {/* <Image source={{ uri: event.image }} style={styles.eventImage} /> */}
       <View style={styles.infoContainer}>
         <View style={styles.infoRow}>
           <View style={styles.infoBox}>
             <FontAwesome name="map-marker" size={16} color="#FFF" />
-            <Text style={styles.infoText}>
-              {event.location},{event.address}
-            </Text>
+            <Text style={styles.infoText}>{event.address}</Text>
           </View>
           <View style={styles.infoBox}>
             <FontAwesome name="calendar" size={16} color="#FFF" />
-            <Text style={styles.infoText}>{event.date}</Text>
+            <Text style={styles.infoText}>
+              {dayjs(event.date).format(" YYYY-MM-DD")}
+            </Text>
           </View>
         </View>
         <View style={styles.infoRow}>
           <View style={styles.infoBox}>
             <FontAwesome name="clock-o" size={16} color="#FFF" />
-            <Text style={styles.infoText}>{event.time}</Text>
+            <Text style={styles.infoText}>
+              {event.startTime} To {event.endTime}
+            </Text>
           </View>
           <View style={styles.infoBox}>
             <FontAwesome name="users" size={16} color="#FFF" />
