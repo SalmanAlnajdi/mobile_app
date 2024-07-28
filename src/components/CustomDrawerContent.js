@@ -22,7 +22,11 @@ const CustomDrawerContent = (props) => {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Logout" onPress={handleLogout} />
+      <DrawerItem
+        label="Logout"
+        onPress={handleLogout}
+        style={{ backgroundColor: "#d90429" }}
+      />
     </DrawerContentScrollView>
   );
 };

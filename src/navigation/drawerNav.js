@@ -24,6 +24,8 @@ const DrawerNav = () => {
       screenOptions={{
         headerShown: false,
         drawerPosition: "right",
+        drawerStyle: { backgroundColor: "#1e1e2b" },
+        drawerLabelStyle: { color: "white" },
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
