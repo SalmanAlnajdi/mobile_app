@@ -3,9 +3,13 @@ import React, { useContext } from "react";
 import { logout } from "../apis/auth";
 import UserContext from "../context/UserContext";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
+import settings from "../screens/settings";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const NavBar = () => {
   const [user, setUser] = useContext(UserContext);
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -14,6 +18,7 @@ const NavBar = () => {
         alignItems: "center",
         justifyContent: "space-between",
         padding: 10,
+        backgroundColor: "#1E1E2B",
       }}
     >
       <View style={{ flex: 1 }}></View>
@@ -43,8 +48,9 @@ const NavBar = () => {
         >
           <Pressable
             onPress={() => {
-              logout();
-              setUser(false);
+              // <Drawer.openDrawer name={settings} component={settings} />;
+              navigation.dispatch(DrawerActions.openDrawer());
+              // DrawerActions.openDrawer();,
             }}
           >
             <Ionicons name="settings-sharp" size={24} color="white" />
