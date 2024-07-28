@@ -7,24 +7,50 @@ const getAllDonation = async () => {
 };
 
 const createDonation = async (donation, image) => {
-  const formData = new FormData();
-
-  formData.append("image", image);
   try {
-    const res = await instance.post("/donation", {
-      name: donation.name,
-      description: donation.description,
-      condition: donation.condition,
-      listId: donation.listId,
-    });
+    const formData = new FormData();
 
-    console.log("Response:", res);
+    // Append the image if it exists
+    if (image) {
+      formData.append("image", {
+        uri: image,
+        type: "image/png",
+        name: "image.png",
+      });
+    }
+
+    // Append all donation keys to formData
+    for (let key in donation) {
+      if (donation[key] !== null) {
+        formData.append(key, donation[key]);
+      }
+    }
+
+    const res = await instance.post("/donation", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return res.data;
   } catch (error) {
-    console.error("Error creating donatition:", error);
+    console.error("Error creating donation:", error);
     throw error;
   }
 };
+
+// const formData = new FormData();
+
+// formData.append("image", image);
+// try {
+//   const res = await instance.post("/donation", {
+//     name: donation.name,
+//     description: donation.description,
+//     condition: donation.condition,
+//     listId: donation.listId,
+//   });
+
+//   console.log("Response:", res);
+//   return res.data;
 
 const createList = async (donationList) => {
   const formData = new FormData();

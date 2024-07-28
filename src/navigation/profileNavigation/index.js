@@ -134,8 +134,6 @@ const ProfileNavigation = () => {
   const profileImage = `${BASE_URL}/${userProfile?.image}`;
   // const profileImage = `${userProfile?.image}`;
 
-  console.log("profile image", profileImage);
-
   return (
     <View style={{ flex: 1, backgroundColor: "#1E1E2B" }}>
       <CustomHeader username={username} profileImage={profileImage} />

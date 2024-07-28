@@ -1,253 +1,4 @@
-// import {
-//   Button,
-//   Pressable,
-//   ScrollView,
-//   StyleSheet,
-//   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   View,
-// } from "react-native";
-// import React, { useContext, useState, useEffect } from "react";
-// import * as ImagePicker from "expo-image-picker";
-// import { logout, myProfile, updateProfile } from "../../apis/auth";
-// import {
-//   QueryClient,
-//   useMutation,
-//   useQuery,
-//   useQueryClient,
-// } from "@tanstack/react-query";
-// import UserContext from "../../context/UserContext";
-// import { LinearGradient } from "expo-linear-gradient";
-
-// const ProfilePage = () => {
-//   const [user, setUser] = useContext(UserContext);
-//   const [userInfo, setUserInfo] = useState({});
-//   const [profileImage, setProfileImage] = useState("");
-//   const queryClient = useQueryClient();
-
-//   const { data: userProfile } = useQuery({
-//     queryKey: ["getMyProfile"],
-//     queryFn: myProfile,
-//   });
-
-//   useEffect(() => {
-//     if (userProfile) {
-//       setUserInfo(userProfile);
-//     }
-//   }, [userProfile]);
-
-//   const { mutate } = useMutation({
-//     mutationKey: ["updateProfile"],
-//     mutationFn: (updateInfo) => updateProfile(updateInfo),
-//     onSuccess: () => {
-//       console.log("Profile updated successfully");
-//       queryClient.invalidateQueries({ queryKey: ["getMyProfile"] });
-//     },
-//     onError: (error) => {
-//       console.error(error);
-//     },
-//   });
-
-//   const onChangeHandler = (key, value) => {
-//     setUserInfo({ ...userInfo, [key]: value });
-//   };
-
-//   const onUpdateProfile = async (userInfo) => {
-//     await mutate(userInfo);
-//   };
-
-//   const pickImage = async () => {
-//     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-//     if (status !== "granted") {
-//       Alert.alert(
-//         "Permission denied",
-//         "We need permission to access your photos"
-//       );
-//       return;
-//     }
-
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     console.log(result);
-
-//     if (!result.canceled) {
-//       console.log(result);
-//       setProfileImage(result.uri);
-//       setUserInfo({ ...userInfo, image: result.uri });
-//     }
-//   };
-
-//   const takePhoto = async () => {
-//     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-//     if (status !== "granted") {
-//       Alert.alert(
-//         "Permission denied",
-//         "We need permission to access your camera"
-//       );
-//       return;
-//     }
-
-//     let result = await ImagePicker.launchCameraAsync({
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     console.log(result);
-
-//     if (!result.canceled) {
-//       console.log(result);
-//       setProfileImage(result.uri);
-//       setUserInfo({ ...userInfo, image: result.uri });
-//     }
-//   };
-
-//   return (
-//     <ScrollView
-//       scrollEventThrottle={16}
-//       style={{ flex: 1, backgroundColor: "#1E1E2B" }}
-//     >
-//       <View
-//         style={{
-//           flex: 1,
-//           justifyContent: "center",
-//           alignItems: "center",
-//           backgroundColor: "#1E1E2B",
-//           paddingBottom: 100,
-//         }}
-//       >
-//         <Button title="Choose from Gallery" onPress={pickImage} />
-//         <Button title="Take Photo" onPress={takePhoto} />
-
-//         <View
-//           style={{
-//             flexDirection: "column",
-//             width: "100%",
-//             justifyContent: "center",
-//             alignItems: "center",
-//           }}
-//         >
-//           <TextInput
-//             defaultValue={userProfile?.username}
-//             onChangeText={(text) => onChangeHandler("username", text)}
-//             style={styles.input}
-//           />
-//           <TextInput
-//             defaultValue={userProfile?.email}
-//             onChangeText={(text) => onChangeHandler("email", text)}
-//             style={styles.input}
-//           />
-//           <TextInput
-//             defaultValue={userProfile?.firstName}
-//             onChangeText={(text) => onChangeHandler("firstName", text)}
-//             style={styles.input}
-//           />
-//           <TextInput
-//             defaultValue={userProfile?.lastName}
-//             onChangeText={(text) => onChangeHandler("lastName", text)}
-//             style={styles.input}
-//           />
-//           <TextInput
-//             defaultValue={userProfile?.phone}
-//             onChangeText={(text) => onChangeHandler("phone", text)}
-//             style={styles.input}
-//           />
-//           <TextInput
-//             defaultValue={userProfile?.gender}
-//             onChangeText={(text) => onChangeHandler("gender", text)}
-//             style={styles.input}
-//           />
-//           <Text style={styles.text}>{userProfile?.image}</Text>
-//           <TouchableOpacity
-//             style={{
-//               width: "100%",
-//               alignItems: "center",
-//               justifyContent: "center",
-//             }}
-//             onPress={() => onUpdateProfile(userInfo)}
-//           >
-//             <LinearGradient
-//               colors={["#4D81D3", "#9765B5"]}
-//               start={{ x: 0, y: 0 }}
-//               end={{ x: 1, y: 0 }}
-//               style={{
-//                 padding: 15,
-//                 borderRadius: 10,
-//                 marginBottom: 20,
-//                 width: "80%",
-//                 alignItems: "center",
-//               }}
-//             >
-//               <Text style={styles.updateButtonText}>Update Profile</Text>
-//             </LinearGradient>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     </ScrollView>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   input: {
-//     width: "80%",
-//     height: 40,
-//     borderColor: "#4583D5",
-//     borderWidth: 1,
-//     marginBottom: 12,
-//     paddingLeft: 8,
-
-//     placeholderTextColor: "FFFFFF",
-//     backgroundColor: "#1E1E2B",
-//     color: "#fff",
-//     padding: 10,
-//     borderRadius: 10,
-//   },
-//   updateText: {
-//     color: "#fff",
-//   },
-//   updateButtonText: {
-//     color: "#fff",
-//     fontSize: 16,
-//     width: "100%",
-//   },
-//   buttonText: {
-//     color: "#4a90e2",
-//   },
-//   radioContainer: {
-//     width: "80%",
-//     marginBottom: 12,
-//   },
-//   radioText: {
-//     color: "#fff",
-//     marginBottom: 8,
-//   },
-//   radioButton: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     borderColor: "#fff",
-//   },
-//   radioLabel: {
-//     color: "#fff",
-//     marginLeft: 8,
-//   },
-//   radioRow: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//   },
-// });
-
-// export default ProfilePage;
-
-////////////////////////////////////////////////////////////////////
-
-// 
-
+import React, { useContext, useState, useEffect } from "react";
 import {
   Button,
   ScrollView,
@@ -258,33 +9,46 @@ import {
   View,
   Image,
   Alert,
+  Modal,
 } from "react-native";
-import React, { useContext, useState, useEffect } from "react";
-import * as ImagePicker from "expo-image-picker";
-import { logout, myProfile, updateProfile } from "../../apis/auth";
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import UserContext from "../../context/UserContext";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
+import UserContext from "../../context/UserContext";
+import { logout, myProfile, updateProfile } from "../../apis/auth";
+import ImagePickerModal from "../../components/ImagePickerModal";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { BASE_URL } from "../../apis";
 
 const ProfilePage = () => {
   const [user, setUser] = useContext(UserContext);
   const [userInfo, setUserInfo] = useState({});
+  const [originalUserInfo, setOriginalUserInfo] = useState({});
   const [profileImage, setProfileImage] = useState(null);
+  const [originalProfileImage, setOriginalProfileImage] = useState(null);
+  const [showImagePicker, setShowImagePicker] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: userProfile } = useQuery({
     queryKey: ["getMyProfile"],
     queryFn: myProfile,
+    onSuccess: (data) => {
+      setUserInfo(data);
+      setOriginalUserInfo(data);
+      setProfileImage(data.image);
+      setOriginalProfileImage(data.image);
+    },
+    onError: (error) => {
+      console.error(error);
+    },
   });
 
   useEffect(() => {
     if (userProfile) {
       setUserInfo(userProfile);
+      setOriginalUserInfo(userProfile);
       setProfileImage(userProfile.image);
+      setOriginalProfileImage(userProfile.image);
     }
   }, [userProfile]);
 
@@ -294,6 +58,7 @@ const ProfilePage = () => {
     onSuccess: () => {
       console.log("Profile updated successfully");
       queryClient.invalidateQueries({ queryKey: ["getMyProfile"] });
+      setIsEditing(false);
     },
     onError: (error) => {
       console.error(error);
@@ -304,53 +69,22 @@ const ProfilePage = () => {
     setUserInfo({ ...userInfo, [key]: value });
   };
 
-  const onUpdateProfile =  (userInfo) => {
-     mutate(userInfo);
+  const onUpdateProfile = (userInfo) => {
+    mutate(userInfo);
   };
 
-  const pickImage = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(
-        "Permission denied",
-        "We need permission to access your photos"
-      );
-      return;
-    }
-
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setProfileImage(result.assets[0].uri);
-      setUserInfo({ ...userInfo, image: result.assets[0].uri });
-    }
+  const toggleImagePicker = () => {
+    setShowImagePicker(!showImagePicker);
   };
 
-  const takePhoto = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(
-        "Permission denied",
-        "We need permission to access your camera"
-      );
-      return;
-    }
+  const enableEditing = () => {
+    setIsEditing(true);
+  };
 
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setProfileImage(result.assets[0].uri);
-      setUserInfo({ ...userInfo, image: result.assets[0].uri });
-    }
+  const disableEditing = () => {
+    setIsEditing(false);
+    setUserInfo(originalUserInfo);
+    setProfileImage(originalProfileImage);
   };
 
   return (
@@ -358,87 +92,183 @@ const ProfilePage = () => {
       scrollEventThrottle={16}
       style={{ flex: 1, backgroundColor: "#1E1E2B" }}
     >
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#1E1E2B",
-          paddingBottom: 100,
-        }}
-      >
-        {profileImage ? (
-          <Image source={{ uri: profileImage }} style={styles.profileImage} />
-        ) : (
-          <View style={styles.imagePlaceholder}>
-            <Text style={{ color: "#aaa" }}>Upload Profile Photo</Text>
-          </View>
-        )}
-
-        <Button title="Choose from Gallery" onPress={pickImage} />
-        <Button title="Take Photo" onPress={takePhoto} />
-
+      <View style={styles.container}>
         <View
           style={{
-            flexDirection: "column",
             width: "100%",
+            alignItems: "flex-end",
             justifyContent: "center",
-            alignItems: "center",
+            paddingRight: 20,
           }}
         >
-          <TextInput
-            defaultValue={userProfile?.username}
-            onChangeText={(text) => onChangeHandler("username", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.email}
-            onChangeText={(text) => onChangeHandler("email", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.firstName}
-            onChangeText={(text) => onChangeHandler("firstName", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.lastName}
-            onChangeText={(text) => onChangeHandler("lastName", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.phone}
-            onChangeText={(text) => onChangeHandler("phone", text)}
-            style={styles.input}
-          />
-          <TextInput
-            defaultValue={userProfile?.gender}
-            onChangeText={(text) => onChangeHandler("gender", text)}
-            style={styles.input}
-          />
-          <TouchableOpacity
-            style={{
-              width: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onPress={() => onUpdateProfile(userInfo)}
-          >
+          {!isEditing ? (
+            <TouchableOpacity
+              onPress={enableEditing}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesome5 name="edit" size={24} color="white" />
+            </TouchableOpacity>
+          ) : null}
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
+          {profileImage ? (
             <LinearGradient
               colors={["#4D81D3", "#9765B5"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={{
-                padding: 15,
-                borderRadius: 10,
-                marginBottom: 20,
-                width: "80%",
+                width: 80,
+                height: 80,
+                borderRadius: "100%",
+                backgroundColor: "#9765B5",
                 alignItems: "center",
+                justifyContent: "center",
+                padding: 5,
               }}
             >
-              <Text style={styles.updateButtonText}>Update Profile</Text>
+              <View
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "100%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#1E1E2B",
+                }}
+              >
+                <Image
+                  source={{ uri: `${BASE_URL}/${profileImage}` }}
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: 50,
+                    backgroundColor: "white",
+                  }}
+                />
+              </View>
             </LinearGradient>
-          </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 50,
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesome5 name="user" size={24} color="black" />
+            </View>
+          )}
+
+          {isEditing && (
+            <Button title="Upload Photo" onPress={toggleImagePicker} />
+          )}
+        </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showImagePicker}
+          onRequestClose={toggleImagePicker}
+        >
+          <View style={styles.modalBackground}>
+            <ImagePickerModal
+              setProfileImage={setProfileImage}
+              setUserInfo={setUserInfo}
+              userInfo={userInfo}
+              onClose={toggleImagePicker}
+            />
+          </View>
+        </Modal>
+
+        <View style={styles.formContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Username</Text>
+            <TextInput
+              defaultValue={userProfile?.username}
+              onChangeText={(text) => onChangeHandler("username", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              defaultValue={userProfile?.email}
+              onChangeText={(text) => onChangeHandler("email", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>First Name</Text>
+            <TextInput
+              defaultValue={userProfile?.firstName}
+              onChangeText={(text) => onChangeHandler("firstName", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Last Name</Text>
+            <TextInput
+              defaultValue={userProfile?.lastName}
+              onChangeText={(text) => onChangeHandler("lastName", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Phone</Text>
+            <TextInput
+              defaultValue={userProfile?.phone}
+              onChangeText={(text) => onChangeHandler("phone", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Gender</Text>
+            <TextInput
+              defaultValue={userProfile?.gender}
+              onChangeText={(text) => onChangeHandler("gender", text)}
+              style={[styles.input, !isEditing && styles.disabledInput]}
+              editable={isEditing}
+            />
+          </View>
+
+          {isEditing ? (
+            <>
+              <TouchableOpacity
+                style={styles.updateButtonContainer}
+                onPress={() => onUpdateProfile(userInfo)}
+              >
+                <LinearGradient
+                  colors={["#4D81D3", "#9765B5"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.updateButton}
+                >
+                  <Text style={styles.updateButtonText}>Update Profile</Text>
+                </LinearGradient>
+              </TouchableOpacity>
+              <Button title="Cancel" onPress={disableEditing} />
+            </>
+          ) : null}
         </View>
       </View>
     </ScrollView>
@@ -446,49 +276,12 @@ const ProfilePage = () => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    width: "80%",
-    height: 40,
-    borderColor: "#4583D5",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 8,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#1E1E2B",
-    color: "#fff",
-    padding: 10,
-    borderRadius: 10,
-  },
-  updateText: {
-    color: "#fff",
-  },
-  updateButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    width: "100%",
-  },
-  buttonText: {
-    color: "#4a90e2",
-  },
-  radioContainer: {
-    width: "80%",
-    marginBottom: 12,
-  },
-  radioText: {
-    color: "#fff",
-    marginBottom: 8,
-  },
-  radioButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "#fff",
-  },
-  radioLabel: {
-    color: "#fff",
-    marginLeft: 8,
-  },
-  radioRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    paddingBottom: 100,
   },
   profileImage: {
     width: 100,
@@ -504,6 +297,57 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
+  },
+  formContainer: {
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputContainer: {
+    width: "80%",
+    marginBottom: 12,
+  },
+  label: {
+    color: "#aaa",
+    marginBottom: 4,
+  },
+  input: {
+    height: 40,
+    borderColor: "#4583D5",
+    borderWidth: 1,
+    paddingLeft: 8,
+    backgroundColor: "#1E1E2B",
+    color: "#fff",
+    padding: 10,
+    borderRadius: 10,
+  },
+  disabledInput: {
+    backgroundColor: "#555",
+    color: "#aaa",
+  },
+  updateButtonContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  updateButton: {
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: "80%",
+    alignItems: "center",
+  },
+  updateButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    width: "100%",
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

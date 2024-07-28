@@ -1,6 +1,14 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const DonationCard = ({ donationList }) => {
   const navigation = useNavigation();
@@ -15,7 +23,29 @@ const DonationCard = ({ donationList }) => {
           {donationList.donationItemId &&
             donationList.donationItemId.map((item, index) => (
               <View key={index} style={styles.circle}>
-                <Text style={styles.circleText}>{item.name}</Text>
+                <LinearGradient
+                  colors={["#4D81D3", "#9765B5"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "100%",
+                    backgroundColor: "#9765B5",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: 2,
+                  }}
+                >
+                  <Image
+                    source={{ uri: item.image }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "100%",
+                    }}
+                  />
+                </LinearGradient>
               </View>
             ))}
         </View>
@@ -63,6 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginTop: 10,
+    overflow: "hidden",
   },
 
   circle: {
@@ -73,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 5,
+    overflow: "hidden",
   },
 
   circleText: {
