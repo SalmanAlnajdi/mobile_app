@@ -5,12 +5,16 @@ import getAllEvents from "../apis/events";
 import { useQuery } from "@tanstack/react-query";
 import getUserById from "../apis/users";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { BASE_URL } from "../apis";
 
 const EventCard = ({ event }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.card}>
-      <Image source={{ uri: event.image }} style={styles.image} />
+      <Image
+        source={{ uri: `${BASE_URL}/${event.image}` }}
+        style={styles.image}
+      />
       <View style={styles.content}>
         {/* <Text style={styles.status}>Live</Text> */}
         <Text style={styles.title}>{event.name}</Text>
