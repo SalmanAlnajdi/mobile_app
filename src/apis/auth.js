@@ -74,8 +74,6 @@ const updateProfile = async (userInfo) => {
   } catch (error) {
     console.error(error);
   }
-  // const { data } = await instance.put("/user/myprofile", userInfo);
-  // return data;
 };
 
 export {
