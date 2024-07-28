@@ -47,8 +47,35 @@ const myProfile = async () => {
 };
 
 const updateProfile = async (userInfo) => {
-  const { data } = await instance.put("/user/myprofile", userInfo, {});
-  return data;
+  try {
+    const formData = new FormData();
+    for (let key in userInfo) {
+      if (userInfo[key] !== null) {
+        if (key === "image") {
+          console.log(userInfo[key]);
+
+          formData.append(key, {
+            uri: userInfo[key],
+            type: "image/png",
+            name: "image.png",
+          });
+        } else {
+          formData.append(key, userInfo[key]);
+        }
+      }
+    }
+    const { data } = await instance.put("/user/myprofile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  // const { data } = await instance.put("/user/myprofile", userInfo);
+  // return data;
 };
 
 export {

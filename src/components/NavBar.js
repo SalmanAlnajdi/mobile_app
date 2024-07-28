@@ -7,7 +7,9 @@ import { DrawerActions, useNavigation } from "@react-navigation/native";
 import settings from "../screens/settings";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-const NavBar = () => {
+import { useNavigation } from "@react-navigation/native";
+
+const NavBar = ({ showBackArrow }) => {
   const [user, setUser] = useContext(UserContext);
   const navigation = useNavigation();
   return (
@@ -21,7 +23,20 @@ const NavBar = () => {
         backgroundColor: "#1E1E2B",
       }}
     >
-      <View style={{ flex: 1 }}></View>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={{
+            marginLeft: 10,
+          }}
+        >
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </Pressable>
+      </View>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image
           source={require("../assets/Gadha-logo-co.png")}

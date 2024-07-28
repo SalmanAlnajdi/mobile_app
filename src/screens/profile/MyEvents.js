@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import MyEventsCard from "../../components/MyEventsCard";
 
 const MyEvents = () => {
   return (
@@ -9,9 +10,14 @@ const MyEvents = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#1E1E2B",
+        paddingBottom: 80,
       }}
     >
-      <Text>MyEvents</Text>
+      <ScrollView>
+        <MyEventsCard />
+        <MyEventsCard />
+        <MyEventsCard />
+      </ScrollView>
     </View>
   );
 };
