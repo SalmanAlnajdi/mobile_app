@@ -6,9 +6,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import settings from "../screens/settings";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
-import { useNavigation } from "@react-navigation/native";
-
 const NavBar = ({ showBackArrow }) => {
   const [user, setUser] = useContext(UserContext);
   const navigation = useNavigation();

@@ -8,7 +8,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const EventCard = ({ event }) => {
   const navigation = useNavigation();
-
   return (
     <View style={styles.card}>
       <Image source={{ uri: event.image }} style={styles.image} />
