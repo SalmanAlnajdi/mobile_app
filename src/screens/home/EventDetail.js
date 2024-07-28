@@ -74,6 +74,7 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons"; // Make sure to install @expo/vector-icons if not already installed
 import { BASE_URL } from "../../apis";
+
 import { Dayjs } from "dayjs";
 
 const EventDetail = ({ route }) => {
@@ -154,7 +155,7 @@ const EventDetail = ({ route }) => {
         <Text style={styles.detailsText}>{event.description}</Text>
       </View>
       <LinearGradient
-        colors={["#4D81D3", "#9765B5"]}
+        colors={["#4D81D3", "#4EE27D"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={styles.volunteerButton}
