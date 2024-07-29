@@ -34,7 +34,7 @@ const MainNavigation = () => {
               borderRadius: 50,
               shadowColor: "white",
               shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.4,
+              shadowOpacity: 0.2,
               shadowRadius: 10,
               elevation: 10,
               position: "absolute",
