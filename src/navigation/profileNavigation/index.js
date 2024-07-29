@@ -85,6 +85,7 @@ import { myProfile } from "../../apis/auth";
 import { BASE_URL } from "../../apis";
 import UserContext from "../../context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
+import NavBar from "../../components/NavBar";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -136,6 +137,7 @@ const ProfileNavigation = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#1E1E2B" }}>
+      <NavBar />
       <CustomHeader username={username} profileImage={profileImage} />
       <Tab.Navigator
         screenOptions={{

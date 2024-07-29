@@ -44,13 +44,16 @@ const DonationConfirm = ({ route }) => {
         <Text style={styles.subtitle}>Donation Items:</Text>
         {data?.donationItemId.map((item, index) => (
           <View key={index} style={styles.item}>
+            <View>
+              {item.image && (
+                <Image source={{ uri: item.image }} style={styles.image} />
+              )}
+            </View>
             <Text style={styles.itemName}>Name: {item.name}</Text>
             <Text style={styles.itemDescription}>
               Description: {item.description}
             </Text>
-            {item.image && (
-              <Image source={{ uri: item.image }} style={styles.image} />
-            )}
+
             <Text style={styles.itemCondition}>
               Condition: {item.condition}
             </Text>
@@ -67,7 +70,7 @@ const DonationConfirm = ({ route }) => {
         <Text style={styles.buttonText}>Confirm</Text>
       </Pressable> */}
       <LinearGradient
-        colors={["#4D81D3", "#9765B5"]}
+        colors={["#4D81D3", "#14933A"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={{
@@ -91,6 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 100,
     backgroundColor: "#1E1E2B",
+    width: "100%",
   },
   title: {
     fontSize: 24,
@@ -114,6 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#29293E",
     borderRadius: 8,
     color: "#fff",
+    width: "90%",
   },
   itemName: {
     fontSize: 18,

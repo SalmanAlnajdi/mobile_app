@@ -1,9 +1,18 @@
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import DonationCard from "../../components/DonationCard";
 import { getListsByUser } from "../../apis/donations";
 import { useQuery } from "@tanstack/react-query";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HomeDonatios = () => {
   const navigation = useNavigation();
@@ -22,18 +31,45 @@ const HomeDonatios = () => {
         backgroundColor: "#1E1E2B",
       }}
     >
-      <Text style={{ fontSize: 30 }}>HomeDonatios</Text>
-      <Button
-        title=" Add Donate List + "
-        onPress={() => {
-          navigation.navigate("AddDonationList");
+      <View
+        style={{
+          height: 100,
+          width: "100%",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+          paddingTop: 40,
+          marginTop: 20,
         }}
-      ></Button>
+      >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("AddDonationList");
+          }}
+        >
+          <LinearGradient
+            colors={["#4D81D3", "#9765B5"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{
+              padding: 5,
+              borderRadius: 10,
+              margin: 16,
+              width: 40,
+              height: 40,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Ionicons name="create" size={24} color="white" />
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
       <View
         style={{
           height: "100%",
           width: "100%",
           borderBlockColor: "red",
+          paddingBottom: 150,
         }}
       >
         <ScrollView

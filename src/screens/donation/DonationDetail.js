@@ -87,12 +87,15 @@ import {
   TouchableOpacity,
   View,
   Clipboard,
+  Image,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteList } from "../../apis/donations";
 import { Ionicons } from "@expo/vector-icons"; // Make sure to install @expo/vector-icons if not already installed
+import { BASE_URL } from "../../apis";
 
 const DonationDetail = ({ route }) => {
   const { donationList } = route.params;
@@ -119,44 +122,87 @@ const DonationDetail = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <Text style={styles.heading}>DonationDetail</Text>
-        <Text style={styles.text}>List name: {donationList.name}</Text>
-        <Text style={styles.text}>Items donated:</Text>
-        {donationList.donationItemId.map((item, index) => (
-          <View key={index}>
-            <Text style={styles.text}>
-              {index + 1}. {item.name}
-            </Text>
-          </View>
-        ))}
-
-        <Text style={styles.text}>SHARE LINK</Text>
-        <View style={styles.linkContainer}>
-          <Text
-            style={styles.linkText}
-          >{`localhost:3000/link/${donationList._id}`}</Text>
-          <TouchableOpacity onPress={copyToClipboard} style={styles.copyButton}>
-            <Ionicons name="copy" size={20} color="#FFF" />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={deleteListHandler}
+    <View style={{ flex: 1, backgroundColor: "#1E1E2B" }}>
+      <ScrollView style={{ backgroundColor: "#1E1E2B" }}>
+        <View
+          style={{ flexDirection: "column", justifyContent: "space-between" }}
         >
-          <Text style={styles.deleteButtonText}>Delete The List</Text>
-        </TouchableOpacity>
-      </View>
+          <View
+            style={{ flexDirection: "column", justifyContent: "space-between" }}
+          >
+            <Text style={styles.text}>List name: {donationList.name}</Text>
+
+            <View
+              style={{
+                height: 200,
+                width: "100%",
+                flexDirection: "row",
+                gap: 10,
+                marginBottom: 10,
+                flexWrap: "wrap",
+              }}
+            >
+              {donationList.donationItemId.map(
+                (item, index) => (
+                  console.log(item.image),
+                  (
+                    <View key={index}>
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{
+                          width: 180,
+                          height: 200,
+                          borderRadius: 10,
+                        }}
+                      />
+                      {/* <Image
+                  source={{ uri: `${BASE_URL}/${item.image}` }}
+                  style={{ width: 200, height: 200 }}
+                  /> */}
+
+                      <Text style={styles.text}>Name: {item.name}</Text>
+
+                      <Text style={styles.text}>
+                        Description: {item.description}
+                      </Text>
+                      <Text style={styles.text}>
+                        Condition: {item.condition}
+                      </Text>
+                    </View>
+                  )
+                )
+              )}
+            </View>
+            <View style={{ flex: 1, gap: 10 }}>
+              <Text style={styles.text}>SHARE LINK</Text>
+              <View style={styles.linkContainer}>
+                <Text
+                  style={styles.linkText}
+                >{`localhost:3000/link/${donationList._id}`}</Text>
+                <TouchableOpacity
+                  onPress={copyToClipboard}
+                  style={styles.copyButton}
+                >
+                  <Ionicons name="copy" size={20} color="#FFF" />
+                </TouchableOpacity>
+              </View>
+
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={deleteListHandler}
+              >
+                <Text style={styles.deleteButtonText}>Delete The List</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#1E1E2B",
     height: "100%",
   },
