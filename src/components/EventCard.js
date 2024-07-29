@@ -5,21 +5,63 @@ import getAllEvents from "../apis/events";
 import { useQuery } from "@tanstack/react-query";
 import getUserById from "../apis/users";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import { BASE_URL } from "../apis";
+import { FontAwesome } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import location from "../assets/image.png";
+import dayjs, { Dayjs } from "dayjs";
 const EventCard = ({ event }) => {
   const navigation = useNavigation();
-
+  console.log(event.owner);
   return (
     <View style={styles.card}>
-      <Image source={{ uri: event.image }} style={styles.image} />
+      <Image
+        source={{ uri: `${BASE_URL}/${event.image}` }}
+        style={styles.image}
+      />
       <View style={styles.content}>
         {/* <Text style={styles.status}>Live</Text> */}
-        <Text style={styles.title}>{event.name}</Text>
-        <Text style={styles.location}>{event.location}</Text>
+        <View style={styles.useravatar}>
+          <LinearGradient
+            colors={["#4D81D3", "#9765B5"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{
+              width: 43,
+              height: 43,
+              borderRadius: "100%",
+              backgroundColor: "#9765B5",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 5,
+            }}
+          >
+            <Image
+              source={{ uri: `${BASE_URL}/${event.owner.image}` }}
+              style={{
+                width: 35,
+                height: 35,
+                borderRadius: 50,
+                backgroundColor: "white",
+              }}
+            />
+          </LinearGradient>
+          {/* <Text style={styles.owner}> {event?.owner?.username}</Text> */}
+          <Text style={styles.title}>{event.name}</Text>
+        </View>
+        <View style={styles.infoBox}>
+          <Image source={location} style={{ height: 16, width: 16 }} />
+          {/* <FontAwesome name="map-marker" size={16} color="#4583D5" /> */}
+          <Text style={styles.location}> {event.address}</Text>
+        </View>
         <Text style={styles.description}>{event.description}</Text>
-        <Text style={styles.owner}>Created by: {event?.owner?.username}</Text>
-        <Text style={styles.date}>Event Date: {event.date}</Text>
-        <Text style={styles.time}>Event Time: {event.time}</Text>
+
+        <Text style={styles.date}>
+          {dayjs(event.date).format(" dddd DD-MM-YYYY")}
+        </Text>
+        <Text style={styles.time}>
+          From {event.startTime} To {event.endTime}
+        </Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("EventDetail", { event });
@@ -40,7 +82,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 350,
+    width: 400,
     height: 150,
   },
   content: {
@@ -58,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   location: {
-    color: "#ccc",
+    color: "#BFCEE1",
     fontSize: 16,
     marginVertical: 5,
   },
@@ -68,9 +110,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   owner: {
-    color: "#bbb",
-    fontSize: 14,
-    marginBottom: 5,
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
   },
   date: {
     color: "#bbb",
@@ -80,11 +122,32 @@ const styles = StyleSheet.create({
     color: "#bbb",
     fontSize: 14,
     marginBottom: 10,
+    marginLeft: 4,
   },
   seeMore: {
     color: "#a0a0e0",
     fontSize: 14,
     textAlign: "right",
+  },
+  infoBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    // backgroundColor: "#29293E",
+    borderRadius: 10,
+    marginLeft: 50,
+    marginBottom: 10,
+    width: 100,
+    height: 30,
+    paddingEnd: 20,
+  },
+  useravatar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "normal",
+    width: 200,
+    height: 30,
+    gap: 10,
   },
 });
 export default EventCard;
