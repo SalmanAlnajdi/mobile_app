@@ -42,17 +42,17 @@ const HomeScreen = () => {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={{
-            padding: 15,
             borderRadius: 10,
 
             width: 40,
             height: 40,
 
             alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <TouchableOpacity>
-            <FontAwesome name="filter" size={14} color="#FFF" />
+            <FontAwesome name="sliders" size={24} color="#FFF" />
           </TouchableOpacity>
         </LinearGradient>
       </View>
@@ -80,13 +80,17 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
+    width: "80%",
     height: 40,
-    backgroundColor: "#29293E",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    color: "#FFF",
-    fontSize: 16,
+    borderColor: "#4583D5",
+    borderWidth: 1,
     marginRight: 10,
+    paddingLeft: 8,
+    placeholderTextColor: "FFFFFF",
+    backgroundColor: "#1E1E2B",
+    color: "#fff",
+    padding: 10,
+    borderRadius: 10,
   },
   filterButton: {
     width: 40,
