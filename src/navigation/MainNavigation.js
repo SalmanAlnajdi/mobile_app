@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
   return (
     <View style={{ flex: 1 }}>
-      <NavBar />
+      {/* <NavBar /> */}
       <View
         style={{
           flex: 1,
