@@ -59,9 +59,9 @@ const EventCard = ({ event }) => {
         <Text style={styles.date}>
           {dayjs(event.date).format(" dddd DD-MM-YYYY")}
         </Text>
-        <Text style={styles.time}>
+        {/* <Text style={styles.time}>
           From {event.startTime} To {event.endTime}
-        </Text>
+        </Text> */}
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("EventDetail", { event });
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginLeft: 50,
     marginBottom: 10,
-    width: 100,
+    width: 200,
     height: 30,
     paddingEnd: 20,
   },
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "normal",
-    width: 200,
+    width: 300,
     height: 30,
     gap: 10,
   },
