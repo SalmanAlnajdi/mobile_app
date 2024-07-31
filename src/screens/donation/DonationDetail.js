@@ -12,7 +12,7 @@ import { Card, Title, Paragraph, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteList } from "../../apis/donations";
-import { Ionicons } from "@expo/vector-icons"; // Make sure to install @expo/vector-icons if not already installed
+import { Ionicons } from "@expo/vector-icons";
 import { BASE_URL } from "../../apis";
 import { LinearGradient } from "expo-linear-gradient";
 
