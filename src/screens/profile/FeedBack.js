@@ -16,10 +16,6 @@ const FeedBack = () => {
     >
       <ScrollView style={{ width: "90%" }}>
         <FeedBackCard />
-        <FeedBackCard />
-        <FeedBackCard />
-        <FeedBackCard />
-        <FeedBackCard />
       </ScrollView>
     </View>
   );

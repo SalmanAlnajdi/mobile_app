@@ -12,7 +12,7 @@ import location from "../assets/image.png";
 import dayjs, { Dayjs } from "dayjs";
 const EventCard = ({ event }) => {
   const navigation = useNavigation();
-  console.log(event.owner);
+  // console.log(event.owner);
   return (
     <View style={styles.card}>
       <Image
