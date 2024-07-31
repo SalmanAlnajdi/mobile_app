@@ -1,13 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
+
+import { ScrollView, Text, View } from "react-native";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import getAllOrders from "../../apis/order";
+import { useNavigation } from "@react-navigation/native";
+import OrderCard from "../../components/OrderCard";
 
 const Donations = () => {
-  const handleSearchChange = (text) => {
-    setSearchQuery(text);
-    // You can add search filtering logic here if needed
-  };
-  const [searchQuery, setSearchQuery] = useState("");
+  const navigation = useNavigation();
+
+  const { data: orders } = useQuery({
+    queryKey: ["getAllOrders"],
+    queryFn: () => getAllOrders(),
+  });
+
+
   return (
     <View
       style={{
@@ -17,20 +24,25 @@ const Donations = () => {
         backgroundColor: "#1E1E2B",
       }}
     >
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search..."
-          placeholderTextColor="#888"
-          value={searchQuery}
-          onChangeText={handleSearchChange}
-        />
-      </View>
-      <View style={{ flex: 5, backgroundColor: "green", width: "100%" }}>
-        <Text>Donation items receiver</Text>
-      </View>
-      <View style={{ flex: 40, backgroundColor: "blue", width: "100%" }}></View>
-      <Text>Donations</Text>
+
+      <ScrollView>
+        {orders?.map((order) => (
+          <OrderCard key={order._id} order={order} />
+        ))}
+        {/* {orders?.map((order) => (
+        <View key={order._id}>
+        <Text>{order._id}</Text>
+        {order.items.map((item) => (
+            <View key={item._id}>
+            <Text>{item.image}</Text>
+            <Text>{item.name}</Text>
+              <Text>{item.description}</Text>
+              </View>
+              ))}
+              </View>
+              ))} */}
+      </ScrollView>
+
     </View>
   );
 };
