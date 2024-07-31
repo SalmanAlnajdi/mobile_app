@@ -5,9 +5,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EventCard from "../../components/EventCard";
 import { useQuery } from "@tanstack/react-query";
 import getAllEvents from "../../apis/events";
@@ -15,17 +14,70 @@ import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome } from "@expo/vector-icons";
 
 const HomeScreen = () => {
-  const { data: events } = useQuery({
+  const {
+    data: events,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["getAllEvents"],
     queryFn: () => getAllEvents(),
   });
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("All");
+
+  useEffect(() => {
+    filterEvents();
+  }, [searchQuery, selectedAddress, events]);
 
   const handleSearchChange = (text) => {
     setSearchQuery(text);
-    // You can add search filtering logic here if needed
   };
+
+  const handleFilter = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+    setIsDropdownVisible(false);
+  };
+
+  const filterEvents = () => {
+    const filtered = events?.filter((event) => {
+      const matchesAddress =
+        selectedAddress === "All" ||
+        event.address?.toLowerCase() === selectedAddress.toLowerCase();
+      const matchesName = event.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      return matchesAddress && matchesName;
+    });
+    setFilteredEvents(filtered);
+  };
+
+  const addressOptions = [
+    "All",
+    ...new Set(events?.map((event) => event.address)),
+  ];
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>Loading events...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Error loading events</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -41,23 +93,29 @@ const HomeScreen = () => {
           colors={["#4D81D3", "#9765B5"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={{
-            borderRadius: 10,
-
-            width: 40,
-            height: 40,
-
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={styles.filterButton}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleFilter}>
             <FontAwesome name="sliders" size={24} color="#FFF" />
           </TouchableOpacity>
         </LinearGradient>
       </View>
+
       <ScrollView style={styles.scrollView}>
-        {events?.map((event) => (
+        {isDropdownVisible && (
+          <View style={styles.dropdown}>
+            {addressOptions.map((address, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleAddressSelect(address)}
+                style={styles.dropdownItem}
+              >
+                <Text style={styles.dropdownItemText}>{address}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+        {filteredEvents?.map((event) => (
           <EventCard event={event} key={event._id} />
         ))}
       </ScrollView>
@@ -71,6 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#1E1E2B",
     padding: 20,
+    flex: 1,
   },
   searchContainer: {
     flexDirection: "row",
@@ -80,33 +139,53 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    width: "80%",
     height: 40,
     borderColor: "#4583D5",
     borderWidth: 1,
     marginRight: 10,
     paddingLeft: 8,
-    placeholderTextColor: "FFFFFF",
     backgroundColor: "#1E1E2B",
     color: "#fff",
-    padding: 10,
     borderRadius: 10,
   },
   filterButton: {
+    borderRadius: 10,
     width: 40,
     height: 40,
-    borderRadius: 10,
-    backgroundColor: "#6165F6",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
-  filterIcon: {
-    width: 20,
-    height: 20,
-    tintColor: "#FFF",
+  dropdown: {
+    backgroundColor: "#2E2E3D",
+    borderRadius: 10,
+    padding: 10,
+    width: "60%",
+    maxHeight: 200,
+    position: "absolute",
+    zIndex: 1,
+    top: 0,
+    right: 0,
+  },
+  dropdownItem: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomColor: "#444",
+    borderBottomWidth: 1,
+  },
+  dropdownItemText: {
+    color: "#fff",
+    fontSize: 16,
   },
   scrollView: {
     width: "100%",
+  },
+  loadingText: {
+    color: "#fff",
+    fontSize: 18,
+  },
+  errorText: {
+    color: "#ff0000",
+    fontSize: 18,
   },
 });
 

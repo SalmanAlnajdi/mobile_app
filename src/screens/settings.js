@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const settings = () => {
+const Settings = () => {
   const navigation = useNavigation();
 
   return (
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default settings;
+export default Settings;
